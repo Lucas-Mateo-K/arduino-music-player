@@ -17,6 +17,8 @@ float Quarter = .25;
 float Eighth = .125;
 float Sixteenth = .0625;
 
+float tsin[200];
+
 float songA[3][52] = {
   {27,50,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
   {Quarter + Eighth, Quarter + Eighth, Quarter, Eighth, Quarter + Eighth, Quarter, Eighth, Quarter, Eighth, Half + Quarter, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Quarter, Eighth, Quarter, Eighth, Half},
@@ -49,6 +51,17 @@ float songE[3][52] = {
 
 void setup(){
   Serial.begin(115200);
+
+  //Load tsin with the 
+  float sinCount = 0;
+  int index = 0;
+    while(sinCount < 2){
+    tsin[index] = ((255/2) * (sin((((180 * sinCount) * 71) / 4068))) + (255/2));
+    sinCount += 0.01;
+    index ++;
+  }
+
+  /*
   pinMode(3,OUTPUT);
   playSong2(songA);
   delay(1000);
@@ -56,9 +69,10 @@ void setup(){
   delay(1000);
   playSong2(songC);
   delay(2000);
+  */
   playSong2(songD);
   playSong2(songE);
-  //tone2(500,3000,1000);
+  //tone3(notes[4][8], 10000);
 }
 
 void loop(){
@@ -84,7 +98,7 @@ void playSong2(float song[3][52]){
   int x = 0;
   while(x < song[0][0]){
     if(song[0][(x + 2)] > 0){
-      tone2(song[2][x], ((song[1][x] * (60000 / song[0][1])) - 5));
+      tone3(song[2][x], ((song[1][x] * (60000 / song[0][1])) - 5));
     }
     else{
       delay((song[1][x] * (60000 / song[0][1])) - 5);
@@ -122,22 +136,25 @@ void tone2(int note, int length){
 void tone3(int note, int length){
   if(note <= notes[6][11]){
     //MEGA register
-    //TCCR3B = _BV(CS30);
+    TCCR3B = _BV(CS30);
     //UNO register
     //TCCR2B = _BV(CS20);
-    float x = 1;
-    float period = 1000000 / note;
-    unsigned long noteStart = millis();
-    unsigned long noteEnd = noteStart + length;
+    // to increas pitch make tune negative
+    float tune = -13.3;
+    float updRunTm = 90;
+    float updChange = (2 * (updRunTm / (1000000 / note)));
+    float updVall = 0;
+    unsigned long noteEnd = millis() + length;
     while(noteEnd > millis()){
       noInterrupts();
       unsigned long timeMIC = micros();
-      float y = ((255/2) * (sin((((180 * x) * 71) / 4068))) + (255/2));
-      analogWrite(3,y);
-      x += 260 / period;
+      analogWrite(3, tsin[int(100 * updVall)]);
+      updVall += updChange;
+      if(updVall >= 2){
+        updVall -= 2;
+      }
+      delayMicroseconds(tune + updRunTm - (micros() - timeMIC));
       interrupts();
-      timeMIC = micros() - timeMIC;
-      delayMicroseconds(260 - timeMIC);
     }
   }
 }
