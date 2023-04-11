@@ -50,7 +50,6 @@ float songE[3][52] = {
 };
 
 void setup(){
-  Serial.begin(115200);
   pinMode(3,OUTPUT);
   //Load tsin with the 
   float sinCount = 0;
@@ -107,7 +106,6 @@ void tone3(int note, int note2, int length){
       noInterrupts();
       unsigned long timeMIC = micros();
       analogWrite(3, ((tsin[int(100 * updVall)] + tsin[int(100 * updVall2)]) / 2) + (255/2));
-      Serial.println(((tsin[int(100 * updVall)] + tsin[int(100 * updVall2)]) / 2) + (255/2));
       updVall += updChange;
       if(updVall >= 2){
         updVall -= 2;
