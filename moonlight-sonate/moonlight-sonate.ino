@@ -19,27 +19,9 @@ float Sixteenth = .0625;
 
 float tsin[200];
 
-float songA[3][52] = {
-  {27,50,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {Quarter + Eighth, Quarter + Eighth, Quarter, Eighth, Quarter + Eighth, Quarter, Eighth, Quarter, Eighth, Half + Quarter, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Quarter, Eighth, Quarter, Eighth, Half},
-  {notes[4][0], notes[4][0], notes[4][0], notes[4][2], notes[4][4], notes[4][4], notes[4][2], notes[4][4], notes[4][5], notes[4][7], notes[5][0], notes[5][0], notes[5][0], notes[4][7], notes[4][7], notes[4][7], notes[4][4], notes[4][4], notes[4][4], notes[4][0], notes[4][0], notes[4][0], notes[4][7], notes[4][5], notes[4][4], notes[4][2], notes[4][0]}
-};
-
-float songB[3][52] = {
-  {16, 50, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {Quarter, Eighth, Eighth, Eighth, Eighth, Quarter, Eighth, Eighth, Eighth, Eighth, Quarter, Eighth, Eighth, Eighth, Eighth, Quarter, Eighth},
-  {notes[4][11], notes[4][9], notes[4][11], notes[4][9], notes[4][11], notes[4][4], notes[4][4], notes[4][4], notes[4][4], notes[4][4], notes[4][11], notes[4][11], notes[4][11], notes[4][11], notes[4][11], notes[4][6], notes[4][6]}
-};
-
-float songC[3][52] = {
-  {26, 90, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-  {Quarter, Quarter, Quarter, Quarter, Half, Half, Quarter, Quarter, Quarter, Quarter, Half, Half, Quarter, Quarter, Quarter, Quarter, Half, Half, Quarter, Quarter, Quarter, Quarter, Quarter, Quarter, Quarter, Quarter, Half},
-  {notes[4][0], notes[4][4], notes[4][7], notes[4][9], notes[4][7], notes[4][4], notes[4][0], notes[4][2], notes[4][5], notes[4][7], notes[4][5], notes[4][2], notes[4][9], notes[4][11], notes[4][14], notes[4][12], notes[4][11], notes[4][9], notes[4][7], notes[4][5], notes[4][4], notes[4][2], notes[4][4], notes[4][5]}
-};
-
 float songD[3][52] = {
   {48,17.25,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-  {Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth,},
+  {Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth},
   {notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][9], notes[5][1], notes[5][4], notes[4][9], notes[5][1], notes[5][4], notes[4][9], notes[5][2], notes[5][6], notes[4][9], notes[5][2], notes[5][6], notes[4][8], notes[5][0], notes[5][6], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][3], notes[4][6], notes[5][0], notes[5][3]}
 };
 
@@ -49,9 +31,14 @@ float songE[3][52] = {
   {notes[4][4], notes[4][8], notes[5][1], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][3], notes[5][6], notes[4][8], notes[5][3], notes[5][6], notes[4][8], notes[5][3], notes[5][6], notes[4][8], notes[5][3], notes[5][6]}
 };
 
-void setup(){
-  Serial.begin(115200);
+float songF[3][52] = {
+{48,17.5,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+{Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth},
+{notes[4][8], }
+}
 
+void setup(){
+  pinMode(3,OUTPUT);
   //Load tsin with the 
   float sinCount = 0;
   int index = 0;
@@ -60,8 +47,6 @@ void setup(){
     sinCount += 0.01;
     index ++;
   }
-
-  pinMode(3,OUTPUT);
   playSong2(songA);
   delay(1000);
   playSong2(songB);
@@ -70,64 +55,21 @@ void setup(){
   delay(2000);
   playSong2(songD);
   playSong2(songE);
-  //tone2(500,3000,1000);
 }
 
 void loop(){
 }
 
-/*
-void playSong(float song[3][52]){
-  int x = 0;
-  while(x < song[0][0]){
-    if(song[0][(x + 2)] > 0){
-      tone(3, song[2][x], ((song[1][x] * (60000 / song[0][1])) - 25));
-      delay((song[1][x] * (60000 / song[0][1])) - 5);
-    }
-    else{
-      delay((song[1][x] * (60000 / song[0][1])) - 5);
-    }
-    x ++;
-  }
-}
-*/
-
 void playSong2(float song[3][52]){
   int x = 0;
   while(x < song[0][0]){
     if(song[0][(x + 2)] > 0){
-      tone2(song[2][x], ((song[1][x] * (60000 / song[0][1])) - 5));
+      tone3(song[2][x], ((song[1][x] * (60000 / song[0][1])) - 5));
     }
     else{
       delay((song[1][x] * (60000 / song[0][1])) - 5);
     }
     x ++;
-  }
-}
-
-void tone2(int note, int length){
-  //MEGA register
-  //TCCR3B = _BV(CS30);
-  //UNO register
-  //TCCR2B = _BV(CS20);
-  float x = 1;
-  //float x2 = 1;
-  float period = 1000000 / note;
-  //float period2 = 1000000 / note2;
-  unsigned long noteStart = millis();
-  unsigned long noteEnd = noteStart + length;
-  while(noteEnd > millis()){
-    noInterrupts();
-    unsigned long timeMIC = micros();
-    float y = ((255/2) * (sin((((180 * x) * 71) / 4068))) + (255/2));
-    //float y2 = ((255/2) * (sin((((180 * x) * 71) / 4068))) + (255/2));
-    //analogWrite(3,(y+y2) / 2);
-    analogWrite(3,y);
-    x += 260 / period;
-    //x2 += 260 / period2;
-    timeMIC = micros() - timeMIC;
-    interrupts();
-    delayMicroseconds(260 - timeMIC);
   }
 }
 
@@ -137,15 +79,22 @@ void tone3(int note, int length){
     TCCR3B = _BV(CS30);
     //UNO register
     //TCCR2B = _BV(CS20);
-    int updRunTm = 200;
+    //to increas pitch make tune negative
+    float tune = -13.3;
+    float updRunTm = 90;
     float updChange = (2 * (updRunTm / (1000000 / note)));
+    float updVall = 0;
     unsigned long noteEnd = millis() + length;
     while(noteEnd > millis()){
-      unsigned long timeMIC = micros();
       noInterrupts();
-      analogWrite(3,y);
-      Interrupts();
-      delayMicroseconds(updRunTm - (micros() - timeMIC));
+      unsigned long timeMIC = micros();
+      analogWrite(3, tsin[int(100 * updVall)]);
+      updVall += updChange;
+      if(updVall >= 2){
+        updVall -= 2;
+      }
+      delayMicroseconds(tune + updRunTm - (micros() - timeMIC));
+      interrupts();
     }
   }
 }
