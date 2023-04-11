@@ -51,18 +51,16 @@ float songE[3][52] = {
 
 void setup(){
   Serial.begin(115200);
-
+  pinMode(3,OUTPUT);
   //Load tsin with the 
   float sinCount = 0;
   int index = 0;
     while(sinCount < 2){
-    tsin[index] = ((255/2) * (sin((((180 * sinCount) * 71) / 4068))) + (255/2));
+    tsin[index] = ((255/2) * (sin((((180 * sinCount) * 71) / 4068))));
     sinCount += 0.01;
     index ++;
   }
-
   /*
-  pinMode(3,OUTPUT);
   playSong2(songA);
   delay(1000);
   playSong2(songB);
@@ -70,35 +68,19 @@ void setup(){
   playSong2(songC);
   delay(2000);
   */
-  playSong2(songD);
-  playSong2(songE);
-  //tone3(notes[4][8], 10000);
+  //playSong2(songD);
+  //playSong2(songE);
+  tone3(notes[4][0], notes[4][1], 10000);
 }
 
 void loop(){
 }
 
-/*
-void playSong(float song[3][52]){
-  int x = 0;
-  while(x < song[0][0]){
-    if(song[0][(x + 2)] > 0){
-      tone(3, song[2][x], ((song[1][x] * (60000 / song[0][1])) - 25));
-      delay((song[1][x] * (60000 / song[0][1])) - 5);
-    }
-    else{
-      delay((song[1][x] * (60000 / song[0][1])) - 5);
-    }
-    x ++;
-  }
-}
-*/
-
 void playSong2(float song[3][52]){
   int x = 0;
   while(x < song[0][0]){
     if(song[0][(x + 2)] > 0){
-      tone3(song[2][x], ((song[1][x] * (60000 / song[0][1])) - 5));
+      tone3(song[2][x], notes[4][8], ((song[1][x] * (60000 / song[0][1])) - 5));
     }
     else{
       delay((song[1][x] * (60000 / song[0][1])) - 5);
@@ -107,33 +89,7 @@ void playSong2(float song[3][52]){
   }
 }
 
-void tone2(int note, int length){
-  //MEGA register
-  //TCCR3B = _BV(CS30);
-  //UNO register
-  //TCCR2B = _BV(CS20);
-  float x = 1;
-  //float x2 = 1;
-  float period = 1000000 / note;
-  //float period2 = 1000000 / note2;
-  unsigned long noteStart = millis();
-  unsigned long noteEnd = noteStart + length;
-  while(noteEnd > millis()){
-    noInterrupts();
-    unsigned long timeMIC = micros();
-    float y = ((255/2) * (sin((((180 * x) * 71) / 4068))) + (255/2));
-    //float y2 = ((255/2) * (sin((((180 * x) * 71) / 4068))) + (255/2));
-    //analogWrite(3,(y+y2) / 2);
-    analogWrite(3,y);
-    x += 260 / period;
-    //x2 += 260 / period2;
-    timeMIC = micros() - timeMIC;
-    interrupts();
-    delayMicroseconds(260 - timeMIC);
-  }
-}
-
-void tone3(int note, int length){
+void tone3(int note, int note2, int length){
   if(note <= notes[6][11]){
     //MEGA register
     TCCR3B = _BV(CS30);
@@ -141,17 +97,24 @@ void tone3(int note, int length){
     //TCCR2B = _BV(CS20);
     // to increas pitch make tune negative
     float tune = -13.3;
-    float updRunTm = 90;
+    float updRunTm = 150;
     float updChange = (2 * (updRunTm / (1000000 / note)));
     float updVall = 0;
+    float updChange2 = (2 * (updRunTm / (1000000 / note2)));
+    float updVall2 = 0;
     unsigned long noteEnd = millis() + length;
     while(noteEnd > millis()){
       noInterrupts();
       unsigned long timeMIC = micros();
-      analogWrite(3, tsin[int(100 * updVall)]);
+      analogWrite(3, ((tsin[int(100 * updVall)] + tsin[int(100 * updVall2)]) / 2) + (255/2));
+      Serial.println(((tsin[int(100 * updVall)] + tsin[int(100 * updVall2)]) / 2) + (255/2));
       updVall += updChange;
       if(updVall >= 2){
         updVall -= 2;
+      }
+      updVall2 += updChange2;
+      if(updVall2 >= 2){
+        updVall2 -= 2;
       }
       delayMicroseconds(tune + updRunTm - (micros() - timeMIC));
       interrupts();
