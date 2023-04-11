@@ -32,10 +32,10 @@ float songE[3][52] = {
 };
 
 float songF[3][52] = {
-{48,17.5,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-{Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth},
-{notes[4][8], }
-}
+  {48,17.5,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1 ,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+  {Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth, Eighth},
+  {notes[4][8], notes[5][1], notes[5][4], notes[4][8], notes[5][1], notes[5][4], notes[4][9], notes[5][1], notes[5][6], notes[4][9], notes[5][1], notes[5][6], notes[4][8], notes[4][11], notes[5][4], notes[4][8], notes[4][11], notes[5][4], notes[4][9], notes[4][11], notes[5][5],}
+};
 
 void setup(){
   pinMode(3,OUTPUT);
@@ -47,12 +47,6 @@ void setup(){
     sinCount += 0.01;
     index ++;
   }
-  playSong2(songA);
-  delay(1000);
-  playSong2(songB);
-  delay(1000);
-  playSong2(songC);
-  delay(2000);
   playSong2(songD);
   playSong2(songE);
 }
